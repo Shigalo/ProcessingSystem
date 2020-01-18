@@ -4,7 +4,7 @@ use processing;
 
 CREATE TABLE worker(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    login varchar(45) NOT NULL,
+    login varchar(45) NOT NULL UNIQUE,
     password varchar(45) NOT NULL);
 
 CREATE TABLE user_role(
