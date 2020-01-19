@@ -14,49 +14,48 @@ public class WarehouseController {
     @Autowired
     WorkerService userService;
 
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "warehouse/list";
-    }
+    }*/
 
-    @PostMapping("/add")
+    /*@PostMapping("/add")
     public String create(@RequestParam String address, Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/";
-    }
+    }*/
 
-    @GetMapping("/subscribe/{id}")
+    /*@GetMapping("/subscribe/{id}")
     public String subscribe(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/" + id;
-    }
+    }*/
 
-    @GetMapping("/info/{id}")
+    /*@GetMapping("/info/{id}")
     public String getInfo(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "warehouse/info";
-    }
+    }*/
 
-    @PostMapping("/info/{id}")
+    /*@PostMapping("/info/{id}")
     public String setInfo(Model model, @PathVariable Integer id,
                           @RequestParam String address) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/" + id;
-    }
+    }*/
 
-    @PostMapping("/addProduct/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    /*@PostMapping("/addProduct/{id}")
     public String addProduct(Model model,
                              @RequestParam String productData,
                              @RequestParam Integer level,
@@ -66,37 +65,37 @@ public class WarehouseController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/"+id;
-    }
+    }*/
 
-    @GetMapping("/remove/{warehouseId}")
+    /*@GetMapping("/remove/{warehouseId}")
     public String remove(Model model, @PathVariable Integer warehouseId, @RequestParam Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/"+warehouseId;
-    }
+    }*/
 
-    @GetMapping("/use/{warehouseId}")
+    /*@GetMapping("/use/{warehouseId}")
     public String use(Model model, @PathVariable Integer warehouseId, @RequestParam Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/stocks/useWarehouse/" + warehouseId + "?productId=" + id;
-    }
+    }*/
 
-    @GetMapping("/get/{warehouseId}")
+    /*@GetMapping("/get/{warehouseId}")
     public String get(Model model, @PathVariable Integer warehouseId, @RequestParam Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/stocks/getWarehouse/" + warehouseId + "?productId=" + id;
-    }
+    }*/
 
-    @GetMapping("/removeWarehouse/{id}")
+    /*@GetMapping("/removeWarehouse/{id}")
     public String removeWarehouse(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/list";
-    }
+    }*/
 }

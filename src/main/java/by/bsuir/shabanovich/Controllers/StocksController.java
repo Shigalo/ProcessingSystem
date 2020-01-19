@@ -13,23 +13,23 @@ public class StocksController {
     @Autowired
     WorkerService userService;
 
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "stocks/list";
-    }
+    }*/
 
-    @GetMapping("/useWarehouse/{warehouseId}")
+    /*@GetMapping("/useWarehouse/{warehouseId}")
     public String useWarehouse(Model model, @PathVariable Integer warehouseId, @RequestParam Integer productId) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "/stocks/use";
-    }
+    }*/
 
-    @PostMapping("/useWarehouse/{warehouseId}")
+    /*@PostMapping("/useWarehouse/{warehouseId}")
     public String useWarehouseStock(Model model,
                                     @PathVariable Integer warehouseId,
                                     @RequestParam Integer productId,
@@ -38,17 +38,17 @@ public class StocksController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/" + warehouseId;
-    }
+    }*/
 
-    @GetMapping("/getWarehouse/{warehouseId}")
+    /*@GetMapping("/getWarehouse/{warehouseId}")
     public String getWarehouse(Model model, @PathVariable Integer warehouseId, @RequestParam Integer productId) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "/stocks/get";
-    }
+    }*/
 
-    @PostMapping("/getWarehouse/{warehouseId}")
+    /*@PostMapping("/getWarehouse/{warehouseId}")
     public String getWarehouseStock(Model model,
                                     @PathVariable Integer warehouseId,
                                     @RequestParam Integer productId,
@@ -57,17 +57,17 @@ public class StocksController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/warehouse/info/" + warehouseId;
-    }
+    }*/
 
-    @GetMapping("/use/{id}")
+    /*@GetMapping("/use/{id}")
     public String use(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "/stocks/use";
-    }
+    }*/
 
-    @PostMapping("/use/{id}")
+    /*@PostMapping("/use/{id}")
     public String useStock(Model model,
                            @PathVariable Integer id,
                            @RequestParam Integer quantity) {
@@ -75,17 +75,17 @@ public class StocksController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/stocks/list";
-    }
+    }*/
 
-    @GetMapping("/get/{id}")
+    /*@GetMapping("/get/{id}")
     public String get(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "/stocks/get";
-    }
+    }*/
 
-    @PostMapping("/get/{id}")
+    /*@PostMapping("/get/{id}")
     public String getStock(Model model,
                            @PathVariable Integer id,
                            @RequestParam Integer quantity) {
@@ -93,5 +93,5 @@ public class StocksController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/stocks/list/";
-    }
+    }*/
 }

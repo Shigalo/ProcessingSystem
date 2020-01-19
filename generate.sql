@@ -6,7 +6,9 @@ CREATE TABLE worker(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     login varchar(45) NOT NULL UNIQUE,
     password varchar(45) NOT NULL,
-    active int NOT NULL);
+    active int NOT NULL,
+    name varchar(45) NULL,
+    surname varchar(45) NULL);
 
 CREATE TABLE user_role(
     user_id int,

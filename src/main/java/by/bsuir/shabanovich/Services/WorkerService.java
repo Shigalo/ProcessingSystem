@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,7 +35,7 @@ public class WorkerService {
 
     public boolean isAdmin() {
         if(getCurrentUser() != null) {
-            return getCurrentUser().getRoles().contains(Role.ADMIN);
+            return getCurrentUser().getRole().contains(Role.ADMIN);
         }
         return false;
     }
@@ -43,9 +44,20 @@ public class WorkerService {
         return getCurrentUser() != null;
     }
 
-    public void userRemove() {
-        workerRepository.delete(getCurrentUser());
+    public void addUser(String username, String password, String name, String surname, String role) {
+           Worker user = new Worker(username, password, name, surname);
+           switch (role) {
+               case "user": user.setRole(Collections.singleton(Role.USER)); break;
+               case "admin": user.setRole(Collections.singleton(Role.ADMIN)); break;
+               case "logist": user.setRole(Collections.singleton(Role.LOGIST)); break;
+               case "manager": user.setRole(Collections.singleton(Role.MANAGER)); break;
+           }
+           workerRepository.save(user);
     }
+
+    /*public void userRemove() {
+        workerRepository.delete(getCurrentUser());
+    }*/
 
     /*public void edit(String name, String surname) {
         Worker worker = getCurrentUser();

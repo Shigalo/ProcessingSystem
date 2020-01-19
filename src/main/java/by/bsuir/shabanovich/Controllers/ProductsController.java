@@ -14,20 +14,20 @@ public class ProductsController {
     @Autowired
     WorkerService userService;
 
-    @GetMapping("/list")
+    /*@GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "products/list";
-    }
+    }*/
 
-    @GetMapping("/add")
+    /*@GetMapping("/add")
     public String add(@RequestParam String name, @RequestParam String type, Model model) {
         return addProduct(name, type, model);
-    }
+    }*/
 
-    @PostMapping("/add")
+    /*@PostMapping("/add")
     public String addProduct(@RequestParam String name,
                              @RequestParam String type,
                              Model model) {
@@ -35,17 +35,17 @@ public class ProductsController {
         model.addAttribute("isLogin", userService.isLogin());
 
         return "redirect:/products/list";
-    }
+    }*/
 
-    @GetMapping("/info/{id}")
+   /* @GetMapping("/info/{id}")
     public String info(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "products/info";
-    }
+    }*/
 
-    @PostMapping("/info/{id}")
+    /*@PostMapping("/info/{id}")
     public String saveInfo(Model model, @PathVariable Integer id,
                            @RequestParam String name,
                            @RequestParam String type) {
@@ -53,13 +53,13 @@ public class ProductsController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/products/info/" + id;
-    }
+    }*/
 
-    @GetMapping("/remove/{id}")
+    /*@GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/products/list";
-    }
+    }*/
 }

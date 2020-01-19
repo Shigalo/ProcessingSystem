@@ -5,6 +5,9 @@
         <div class="col-md-offset-3 col-md-6">
             <form method="post" action="${pageContext.request.contextPath}/login" novalidate id="auth" class="form-horizontal">
                 <span class="heading">АВТОРИЗАЦИЯ</span>
+                <c:if test="${param.error != null}"><div class="form-group">
+                    <label id="error"  style="color: red" name="error">Ошибка авторизации</label>
+                </div></c:if>
                 <div class="form-group">
                     <label for="login"><input type="text" id="login" name="username" class="form-control" placeholder="Введите логин">
                         <i class="fa fa-user"></i>

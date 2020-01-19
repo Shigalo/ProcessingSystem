@@ -17,7 +17,10 @@
             <li><a href="/mainUser">Главная</a></li>
             <li><a href="/goalPlan">Принятые заказы и доставки</a></li>
             <li><a href="/userForms">Заказы</a></li>
-            <li><a href="${pageContext.request.contextPath}/logout">Выход</a></li>
+            <li><form action="${pageContext.request.contextPath}/logout" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <a href="#" onclick="this.parentNode.submit()">Выход</a>
+            </form></li>
         </ul>
     </nav>
 </div>

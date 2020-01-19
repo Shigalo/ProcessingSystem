@@ -25,11 +25,10 @@ public class HomeController {
     public String profile(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
-
         return "accountWork/profile";
     }
 
-    @GetMapping("/edit")
+    /*@GetMapping("/edit")
     public String edit(Model model,
                        @RequestParam String name,
                        @RequestParam String surname) {
@@ -47,13 +46,35 @@ public class HomeController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/profile";
+    }*/
+
+    @GetMapping("/addUser")
+    public String userForm(Model model) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        return "accountWork/registration";
     }
 
-    @GetMapping("/userRemove")
+    @PostMapping("/addUser")
+    public String addUser(Model model,
+                          @RequestParam String username,
+                          @RequestParam String password,
+                          @RequestParam String name,
+                          @RequestParam String surname,
+                          @RequestParam String role) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        userService.addUser(username, password, name, surname, role);
+        return "redirect:/";
+    }
+
+    /*@GetMapping("/userRemove")
     public String remove(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/";
-    }
+    }*/
 }
