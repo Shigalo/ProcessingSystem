@@ -1,3 +1,19 @@
 body {
     background: url("/resources/images/1.jpg"); /* Путь к фоновому изображению */
 }
+.command {
+    box-shadow: white 1px 0 3px 1px;
+    color: black;
+    font-style: italic;
+    font-size: 17px;
+}
+.command:hover {
+    box-shadow: white 1px 0 3px 1px;
+    color: black;
+    font-style: italic;
+    font-size: 17px;
+}
+td {
+    padding: 5px;
+    text-align: center;
+}

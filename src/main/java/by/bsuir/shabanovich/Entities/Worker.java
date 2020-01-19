@@ -34,4 +34,12 @@ public class Worker {
 
     public Worker() {
     }
+
+    public String getRoleName() {
+        if(role.contains(Role.ADMIN)) return "Администратор";
+        if(role.contains(Role.LOGIST)) return "Логист";
+        if(role.contains(Role.MANAGER)) return "Менеджер";
+        if(role.contains(Role.USER)) return "Пользователь";
+        return "Пользователь";
+    }
 }

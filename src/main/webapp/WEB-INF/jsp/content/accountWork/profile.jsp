@@ -7,6 +7,5 @@
             <a href="${pageContext.request.contextPath}/addUser">addUser</a>
         </div>
     </div>
-
 </div>
 <%@include file='../../parts/footer.jsp'%>

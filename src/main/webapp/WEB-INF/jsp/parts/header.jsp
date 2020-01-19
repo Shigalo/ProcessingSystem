@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
-<c:if test="${isLogin}">
+<%--<c:if test="${isLogin}">--%>
 <div class="container">
     <nav class="navbar navbar-default">
         <ul class="nav navbar-nav">
-            <li><a href="/mainUser">Главная</a></li>
+            <li><a href="${pageContext.request.contextPath}/profile">Профиль</a></li>
+            <li><a href="/workers">Сотрудники</a></li>
+            <li><a href="/manageTemplate">Товары</a></li>
+            <li><a href="/launchForm">Заказы</a></li>
             <li><a href="/goalPlan">Принятые заказы и доставки</a></li>
             <li><a href="/userForms">Заказы</a></li>
             <li><form action="${pageContext.request.contextPath}/logout" method="post">
@@ -24,4 +27,4 @@
         </ul>
     </nav>
 </div>
-</c:if>
+<%--</c:if>--%>

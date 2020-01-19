@@ -7,19 +7,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/stocks")
-public class StocksController {
+@RequestMapping("/workers")
+public class WorkersController {
 
     @Autowired
     WorkerService userService;
 
-    /*@GetMapping("/list")
+    @GetMapping("")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        return "stocks/list";
-    }*/
+        model.addAttribute("users", userService.findAll());
+
+        return "workers/list";
+    }
 
     /*@GetMapping("/useWarehouse/{warehouseId}")
     public String useWarehouse(Model model, @PathVariable Integer warehouseId, @RequestParam Integer productId) {

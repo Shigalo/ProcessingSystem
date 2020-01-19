@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 //    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
 
 @Controller
-public class HomeController {
+public class UserController {
     @Autowired
     WorkerService userService;
 
@@ -67,7 +67,7 @@ public class HomeController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         userService.addUser(username, password, name, surname, role);
-        return "redirect:/";
+        return "redirect:/workers";
     }
 
     /*@GetMapping("/userRemove")
