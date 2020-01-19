@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers(/*"/", "/registration", "/resources/**"*/"/**")
+                .antMatchers(/*"/", "/registration", "/resources/**"*//*"/**"*/"/resources/**")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-//                .logoutSuccessHandler (handler)
                 .permitAll();
     }
 
@@ -42,6 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .dataSource(dataSource)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .usersByUsernameQuery("select login, password, active from worker where login=?")
-                .authoritiesByUsernameQuery("select w.login, u.roles from worker w inner join user_role u on w.id = u.user_id login w.mail = ?");
+                .authoritiesByUsernameQuery("select w.login, u.role from worker w inner join user_role u on w.id = u.user_id where w.login = ?");
     }
 }
