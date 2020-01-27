@@ -21,7 +21,7 @@ CREATE TABLE product(
     factory varchar(45) NOT NULL,
     count int);
 
-CREATE TABLE order(
+CREATE TABLE ordering(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     data varchar(45),
     manager_id int,
