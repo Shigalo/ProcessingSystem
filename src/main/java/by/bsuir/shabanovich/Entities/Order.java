@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Ordering")
 @Data
 public class Order {
 
@@ -17,15 +16,15 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id")
-    private Worker stock;
+    private Worker manager;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public Order(String data, Worker stock, Product product) {
+    public Order(String data, Worker manager, Product product) {
         this.data = data;
-        this.stock = stock;
+        this.manager = manager;
         this.product = product;
     }
 

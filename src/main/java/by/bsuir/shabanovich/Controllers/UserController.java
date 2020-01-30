@@ -4,13 +4,12 @@ import by.bsuir.shabanovich.Services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 //    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     WorkerService userService;
@@ -25,30 +24,12 @@ public class UserController {
     public String profile(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
+        model.addAttribute("access");
+        model.addAttribute("user", userService.getCurrentUser());
         return "accountWork/profile";
     }
 
-    /*@GetMapping("/edit")
-    public String edit(Model model,
-                       @RequestParam String name,
-                       @RequestParam String surname) {
-        model.addAttribute("isLogin", userService.isLogin());
-        model.addAttribute("isAdmin", userService.isAdmin());
-
-        return "redirect:/profile";
-    }
-
-    @PostMapping("/edit")
-    public String editPost(Model model,
-                       @RequestParam String name,
-                       @RequestParam String surname) {
-        model.addAttribute("isLogin", userService.isLogin());
-        model.addAttribute("isAdmin", userService.isAdmin());
-
-        return "redirect:/profile";
-    }*/
-
-    @GetMapping("/addUser")
+    @GetMapping("/add")
     public String userForm(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
@@ -56,7 +37,7 @@ public class UserController {
         return "accountWork/registration";
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/add")
     public String addUser(Model model,
                           @RequestParam String username,
                           @RequestParam String password,
@@ -67,14 +48,36 @@ public class UserController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         userService.addUser(username, password, name, surname, role);
+        model.addAttribute("massage", "Сотрудник добавлен");
         return "redirect:/workers";
     }
 
-    /*@GetMapping("/userRemove")
-    public String remove(Model model) {
+    @GetMapping("/edit")
+    public String edit(Model model) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+        model.addAttribute("user", userService.getCurrentUser());
+
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/edit")
+    public String editPost(Model model,
+                           @RequestParam String name,
+                           @RequestParam String surname) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        return "redirect:/";
-    }*/
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String remove(Model model,
+                         @PathVariable Integer id) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+        String massage = userService.deleteById(id) ? "Пользователь удалён" : "Ошибка удаления";
+        model.addAttribute("massage", massage);
+        return "redirect:/workers";
+    }
 }

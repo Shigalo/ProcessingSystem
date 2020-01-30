@@ -54,6 +54,14 @@ public class WorkerService {
            workerRepository.save(user);
     }
 
+    public boolean deleteById(Integer id) {
+        Worker worker = workerRepository.findById(id);
+        if(worker.equals(getCurrentUser()))
+            return false;
+        workerRepository.delete(worker);
+        return true;
+    }
+
     /*public void userRemove() {
         workerRepository.delete(getCurrentUser());
     }*/

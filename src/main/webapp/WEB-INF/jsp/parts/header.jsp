@@ -13,18 +13,18 @@
 <%--<c:if test="${isLogin}">--%>
 <div class="container">
     <nav class="navbar navbar-default">
+        <form action="${pageContext.request.contextPath}/logout" method="post">
         <ul class="nav navbar-nav">
-            <li><a href="${pageContext.request.contextPath}/profile">Профиль</a></li>
-            <li><a href="/workers">Сотрудники</a></li>
+            <li><a href="${pageContext.request.contextPath}/user/profile">Профиль</a></li>
+            <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
             <li><a href="/manageTemplate">Товары</a></li>
             <li><a href="/launchForm">Заказы</a></li>
             <li><a href="/goalPlan">Принятые заказы и доставки</a></li>
             <li><a href="/userForms">Заказы</a></li>
-            <li><form action="${pageContext.request.contextPath}/logout" method="post">
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                <a href="#" onclick="this.parentNode.submit()">Выход</a>
-            </form></li>
+            <li><a href="#" onclick="this.parentNode.submit()">Выход</a></li>
         </ul>
+            <input type="hidden" name="_csrf" value="${_csrf.token}" />
+        </form>
     </nav>
 </div>
 <%--</c:if>--%>
