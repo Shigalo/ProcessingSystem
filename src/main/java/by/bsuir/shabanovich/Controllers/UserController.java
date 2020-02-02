@@ -24,7 +24,7 @@ public class UserController {
     public String profile(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
-        model.addAttribute("access");
+        model.addAttribute("access", "true");
         model.addAttribute("user", userService.getCurrentUser());
         return "accountWork/profile";
     }
@@ -58,7 +58,7 @@ public class UserController {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("user", userService.getCurrentUser());
 
-        return "redirect:/profile";
+        return "accountWork/edit";
     }
 
     @PostMapping("/edit")
@@ -67,8 +67,40 @@ public class UserController {
                            @RequestParam String surname) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
+        userService.edit(name, surname);
 
-        return "redirect:/profile";
+        return "redirect:/user/profile";
+    }
+
+
+    @GetMapping("/edit_password")
+    public String editPassword(Model model) {
+        model.addAttribute("user", userService.getCurrentUser());
+
+        return "accountWork/password";
+    }
+
+    @PostMapping("/edit_password")
+    public String editPasswordPost(Model model,
+                                   @RequestParam String oldPassword,
+                                   @RequestParam String password,
+                                   @RequestParam String passwordConfirm) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+        int result = userService.editPassword(oldPassword, password, passwordConfirm);
+        switch (result) {
+            case 1:
+                model.addAttribute("massage", "Старый");
+                return "redirect:/user/edit_password";
+            case 2:
+                model.addAttribute("massage", "Повт");
+                return "redirect:/user/edit_password";
+            case 3:
+                model.addAttribute("massage", "Не совп");
+                return "redirect:/user/edit_password";
+            default:
+                return "redirect:/user/profile";
+        }
     }
 
     @GetMapping("/remove/{id}")

@@ -62,14 +62,23 @@ public class WorkerService {
         return true;
     }
 
-    /*public void userRemove() {
-        workerRepository.delete(getCurrentUser());
-    }*/
-
-    /*public void edit(String name, String surname) {
+    public void edit(String name, String surname) {
         Worker worker = getCurrentUser();
         worker.setName(name);
         worker.setSurname(surname);
-        userRepository.save(user);
-    }*/
+        workerRepository.save(worker);
+    }
+
+    public int editPassword(String oldPassword, String password, String passwordConfirm) {
+        Worker worker = getCurrentUser();
+        if(!oldPassword.equals(worker.getPassword()))
+            return 1;
+        if(oldPassword.equals(password))
+            return 2;
+        if(!password.equals(passwordConfirm))
+            return 3;
+        worker.setPassword(password);
+        workerRepository.save(worker);
+        return 0;
+    }
 }
