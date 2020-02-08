@@ -42,3 +42,18 @@ CREATE TABLE delivery(
     waybill_id int,
     CONSTRAINT delivery_waybill FOREIGN KEY (waybill_id) REFERENCES waybill (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
+ALTER TABLE product ADD collection_id int NULL;
+ALTER TABLE product ADD wholesale double NULL;
+ALTER TABLE product ADD retail double NULL;
+ALTER TABLE product ADD article varchar(45) NOT NULL;
+CREATE UNIQUE INDEX product_article_uindex ON product (article);
+
+CREATE TABLE collection
+(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(45)
+);
+
+ALTER TABLE product
+ADD CONSTRAINT product_collection
+FOREIGN KEY (collection_id) REFERENCES collection (id) ON DELETE CASCADE ON UPDATE CASCADE;

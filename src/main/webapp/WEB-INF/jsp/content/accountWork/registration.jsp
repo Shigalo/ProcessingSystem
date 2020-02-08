@@ -8,19 +8,19 @@
 
                 <div class="form-group">
                     <label for="username" class="nubex1">Логин:</label>
-                    <input type="text" class="form-control" id="username"  name="username" >
+                    <input type="text" class="form-control" id="username"  name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password" class="nubex1">Пароль:</label>
-                    <input type="text" class="form-control" id="password" name="password" >
+                    <input type="text" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="form-group">
                     <label for="name" class="nubex1">Имя: </label>
-                    <input type="text" class="form-control" id="name" name="name" >
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="surname" class="nubex1">Фамилия: </label>
-                    <input type="text" class="form-control" id="surname" name="surname" >
+                    <input type="text" class="form-control" id="surname" name="surname" required>
                 </div>
                 <div class="form-group">
                     <label class="nubex1">Должность: </label>

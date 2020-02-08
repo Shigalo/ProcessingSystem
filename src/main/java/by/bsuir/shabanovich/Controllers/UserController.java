@@ -76,7 +76,6 @@ public class UserController {
     @GetMapping("/edit_password")
     public String editPassword(Model model) {
         model.addAttribute("user", userService.getCurrentUser());
-
         return "accountWork/password";
     }
 
@@ -90,14 +89,14 @@ public class UserController {
         int result = userService.editPassword(oldPassword, password, passwordConfirm);
         switch (result) {
             case 1:
-                model.addAttribute("massage", "Старый");
-                return "redirect:/user/edit_password";
+                model.addAttribute("massage", "Неверный старый пароль");
+                return "accountWork/password";
             case 2:
-                model.addAttribute("massage", "Повт");
-                return "redirect:/user/edit_password";
+                model.addAttribute("massage", "Новый и страй пароли совпадают");
+                return "accountWork/password";
             case 3:
-                model.addAttribute("massage", "Не совп");
-                return "redirect:/user/edit_password";
+                model.addAttribute("massage", "Пароли не совпадают");
+                return "accountWork/password";
             default:
                 return "redirect:/user/profile";
         }
