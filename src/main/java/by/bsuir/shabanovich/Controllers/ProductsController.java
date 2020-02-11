@@ -40,15 +40,48 @@ public class ProductsController {
         return "products/add";
     }
 
-    /*@PostMapping("/add")
+    @PostMapping("/add")
     public String addProduct(@RequestParam String name,
-                             @RequestParam String type,
+                             @RequestParam String factory,
+                             @RequestParam String count,
+                             @RequestParam String collection,
+                             @RequestParam String wholesale,
+                             @RequestParam String retail,
+                             @RequestParam String article,
                              Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
+        productService.addProduct(name, factory, count, collection, wholesale, retail, article);
 
-        return "redirect:/products/list";
-    }*/
+        return "redirect:/product/list";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(Model model, @PathVariable Integer id) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        model.addAttribute("product", productService.findById(id));
+        model.addAttribute("collections", collectionService.findAll());
+        return "products/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editProduct(@PathVariable Integer id,
+                              @RequestParam String name,
+                              @RequestParam String factory,
+                              @RequestParam String count,
+                              @RequestParam String collection,
+                              @RequestParam String wholesale,
+                              @RequestParam String retail,
+                              @RequestParam String article,
+                              Model model) {
+        model.addAttribute("isAdmin", userService.isAdmin());
+        model.addAttribute("isLogin", userService.isLogin());
+        productService.editProduct(id, name, factory, count, collection, wholesale, retail, article);
+
+        return "redirect:/product/list";
+    }
 
    /* @GetMapping("/info/{id}")
     public String info(Model model, @PathVariable Integer id) {
@@ -68,11 +101,12 @@ public class ProductsController {
         return "redirect:/products/info/" + id;
     }*/
 
-    /*@GetMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        return "redirect:/products/list";
-    }*/
+        productService.remove(id);
+        return "redirect:/product/list";
+    }
 }

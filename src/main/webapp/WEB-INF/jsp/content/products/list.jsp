@@ -29,7 +29,8 @@
                             <td> ${product.wholesale} </td>
                             <td> ${product.retail} </td>
                             <td> ${product.article} </td>
-                            <%--<td><a href="/user/remove/${user.id}">Удалить</a></td>--%>
+                            <td><a href="/product/edit/${product.id}">Изменить</a></td>
+                            <td><a href="/product/remove/${product.id}">Удалить</a></td>
                         </tr>
                     </c:forEach>
                 </table>

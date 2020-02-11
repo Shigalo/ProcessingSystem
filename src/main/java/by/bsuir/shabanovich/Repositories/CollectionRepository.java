@@ -13,4 +13,6 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
 
     @Transactional
     void deleteById(Integer id);
+
+    Collection findByName(String Name);
 }
