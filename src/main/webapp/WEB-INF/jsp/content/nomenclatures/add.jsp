@@ -14,14 +14,8 @@
                     <input type="text" class="form-control" id="factory" name="factory" required>
                 </div>
                 <div class="form-group">
-                    <label for="count" class="nubex1">Количество: </label>
-                    <input type="number" step="1" min="1" class="form-control" id="count" name="count" required>
-                </div>
-                <div class="form-group">
-                    <label class="nubex1">Коллекция: </label>
-                    <select id="collection" name="collection" required><c:forEach items="${collections}" var="collection">
-                        <option>${collection.name}</option>
-                    </c:forEach></select>
+                    <label for="collection" class="nubex1">Коллекция: </label>
+                    <input type="text" class="form-control" id="collection" name="collection" required>
                 </div>
                 <div class="form-group">
                     <label for="wholesale" class="nubex1">Оптовая цена: </label>

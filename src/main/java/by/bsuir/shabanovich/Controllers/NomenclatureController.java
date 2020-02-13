@@ -1,47 +1,40 @@
 package by.bsuir.shabanovich.Controllers;
 
-import by.bsuir.shabanovich.Services.CollectionService;
-import by.bsuir.shabanovich.Services.ProductService;
+import by.bsuir.shabanovich.Services.NomenclatureService;
 import by.bsuir.shabanovich.Services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/product")
-public class ProductsController {
+@RequestMapping("/nomenclature")
+public class NomenclatureController {
 
     @Autowired
     WorkerService userService;
 
     @Autowired
-    ProductService productService;
-
-    @Autowired
-    CollectionService collectionService;
+    NomenclatureService nomenclatureService;
 
     @GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        model.addAttribute("products", productService.findAll());
-        return "products/list";
+        model.addAttribute("nomenclatures", nomenclatureService.findAll());
+        return "nomenclatures/list";
     }
 
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
-
-        model.addAttribute("collections", collectionService.findAll());
-        return "products/add";
+        return "nomenclatures/add";
     }
 
     @PostMapping("/add")
-    public String addProduct(@RequestParam String name,
+    public String addNomenclature(@RequestParam String name,
                              @RequestParam String factory,
                              @RequestParam String count,
                              @RequestParam String collection,
@@ -51,9 +44,9 @@ public class ProductsController {
                              Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
-        productService.addProduct(name, factory, count, collection, wholesale, retail, article);
+        nomenclatureService.addNomenclature(name, factory, collection, wholesale, retail, article);
 
-        return "redirect:/product/list";
+        return "redirect:/nomenclature/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,13 +54,12 @@ public class ProductsController {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        model.addAttribute("product", productService.findById(id));
-        model.addAttribute("collections", collectionService.findAll());
-        return "products/edit";
+        model.addAttribute("nomenclature", nomenclatureService.findById(id));
+        return "nomenclatures/edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String editProduct(@PathVariable Integer id,
+    public String editNomenclature(@PathVariable Integer id,
                               @RequestParam String name,
                               @RequestParam String factory,
                               @RequestParam String count,
@@ -78,9 +70,9 @@ public class ProductsController {
                               Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
-        productService.editProduct(id, name, factory, count, collection, wholesale, retail, article);
+        nomenclatureService.editNomenclature(id, name, factory, count, collection, wholesale, retail, article);
 
-        return "redirect:/product/list";
+        return "redirect:/nomenclature/list";
     }
 
    /* @GetMapping("/info/{id}")
@@ -106,7 +98,7 @@ public class ProductsController {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        productService.remove(id);
-        return "redirect:/product/list";
+        nomenclatureService.remove(id);
+        return "redirect:/nomenclature/list";
     }
 }

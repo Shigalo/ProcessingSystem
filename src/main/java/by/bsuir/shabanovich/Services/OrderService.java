@@ -1,6 +1,7 @@
 package by.bsuir.shabanovich.Services;
 
 import by.bsuir.shabanovich.Entities.Delivery;
+import by.bsuir.shabanovich.Entities.Order;
 import by.bsuir.shabanovich.Entities.Worker;
 import by.bsuir.shabanovich.Repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,5 +11,12 @@ import java.util.List;
 
 @Service
 public class OrderService {
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    public List<Order> findAll() {
+        return orderRepository.findAll();
+    }
 
 }

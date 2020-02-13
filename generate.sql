@@ -15,19 +15,21 @@ CREATE TABLE user_role(
     role varchar(45),
     CONSTRAINT user_role_worker FOREIGN KEY (user_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
-CREATE TABLE product(
+CREATE TABLE nomenclature(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name varchar(45) NOT NULL,
     factory varchar(45) NOT NULL,
-    count int);
+    collection varchar(45) NOT NULL,
+    wholesale double NULL,
+    retail double NULL,
+    article varchar(45) NOT NULL);
+CREATE UNIQUE INDEX nomenclature_article_uindex ON nomenclature (article);
 
 CREATE TABLE ordering(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     data varchar(45),
     manager_id int,
-    product_id int,
-    CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT order_product FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE ON UPDATE CASCADE);
+    CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE waybill(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -42,18 +44,12 @@ CREATE TABLE delivery(
     waybill_id int,
     CONSTRAINT delivery_waybill FOREIGN KEY (waybill_id) REFERENCES waybill (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
-ALTER TABLE product ADD collection_id int NULL;
-ALTER TABLE product ADD wholesale double NULL;
-ALTER TABLE product ADD retail double NULL;
-ALTER TABLE product ADD article varchar(45) NOT NULL;
-CREATE UNIQUE INDEX product_article_uindex ON product (article);
-
-CREATE TABLE collection
+CREATE TABLE product
 (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(45)
-);
-
-ALTER TABLE product
-ADD CONSTRAINT product_collection
-FOREIGN KEY (collection_id) REFERENCES collection (id) ON DELETE CASCADE ON UPDATE CASCADE;
+    order_id int NOT NULL,
+    nomenclature_id int,
+    ordered int NOT NULL,
+    done int DEFAULT 0 NOT NULL,
+    CONSTRAINT product_order FOREIGN KEY (nomenclature_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT product_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE);

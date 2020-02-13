@@ -3,9 +3,8 @@ package by.bsuir.shabanovich.Entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
-@Entity
+@Entity(name = "ordering")
 @Data
 public class Product {
 
@@ -13,25 +12,21 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
-    private String article;
-    private String factory;
-    private Integer count;
-    private Double wholesale;
-    private Double retail;
+    private Integer ordered;
+    private Integer done;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "collection_id")
-    private Collection collection;
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    public Product(String name, String article, String factory, Integer count, Double wholesale, Double retail, Collection collection) {
-        this.name = name;
-        this.article = article;
-        this.factory = factory;
-        this.count = count;
-        this.wholesale = wholesale;
-        this.retail = retail;
-        this.collection = collection;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "nomenclature_id")
+    private Nomenclature nomenclature;
+
+    public Product(Integer ordered, Order order, Nomenclature nomenclature) {
+        this.ordered = ordered;
+        this.order = order;
+        this.nomenclature = nomenclature;
     }
 
     public Product() {

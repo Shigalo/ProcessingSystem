@@ -4,7 +4,7 @@
     <div class="row" style="margin-top: 30px">
         <div class="col-md-offset-3 col-md-6">
             <div class="myclass">
-                <a class="command" href="${pageContext.request.contextPath}/product/add">Добавить товар</a>
+                <a class="command" href="${pageContext.request.contextPath}/nomenclature/add">Добавить товар</a>
                 <c:if test="${param.massage != null}"><div class="form-group">
                     <label id="error"  style="color: red" >${param.massage}</label>
                 </div></c:if>
@@ -13,24 +13,22 @@
                         <td>ID</td>
                         <td>Наименование</td>
                         <td>Фабрика</td>
-                        <td>Количество</td>
                         <td>Коллекция</td>
                         <td>Оптовая цена</td>
                         <td>Розничная цена</td>
                         <td>Артикул</td>
                     </tr>
-                    <c:forEach items="${products}" var="product">
+                    <c:forEach items="${nomenclatures}" var="nomenclature">
                         <tr>
-                            <td> ${product.id} </td>
-                            <td> ${product.name} </td>
-                            <td> ${product.factory} </td>
-                            <td> ${product.count} </td>
-                            <td> ${product.collection.name} </td>
-                            <td> ${product.wholesale} </td>
-                            <td> ${product.retail} </td>
-                            <td> ${product.article} </td>
-                            <td><a href="/product/edit/${product.id}">Изменить</a></td>
-                            <td><a href="/product/remove/${product.id}">Удалить</a></td>
+                            <td> ${nomenclature.id} </td>
+                            <td> ${nomenclature.name} </td>
+                            <td> ${nomenclature.factory} </td>
+                            <td> ${nomenclature.collection} </td>
+                            <td> ${nomenclature.wholesale} </td>
+                            <td> ${nomenclature.retail} </td>
+                            <td> ${nomenclature.article} </td>
+                            <td><a href="/nomenclature/edit/${nomenclature.id}">Изменить</a></td>
+                            <td><a href="/nomenclature/remove/${nomenclature.id}">Удалить</a></td>
                         </tr>
                     </c:forEach>
                 </table>

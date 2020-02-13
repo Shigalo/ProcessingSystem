@@ -17,8 +17,8 @@
         <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath}/user/profile">Профиль</a></li>
             <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
-            <li><a href="${pageContext.request.contextPath}/product/list">Товары</a></li>
-            <li><a href="/launchForm">Заказы</a></li>
+            <li><a href="${pageContext.request.contextPath}/nomenclature/list">Товары</a></li>
+            <li><a href="${pageContext.request.contextPath}/orders/prepareList">Заказы</a></li>
             <li><a href="/goalPlan">Принятые заказы и доставки</a></li>
             <li><a href="/userForms">Заказы</a></li>
             <li><a href="#" onclick="this.parentNode.submit()">Выход</a></li>

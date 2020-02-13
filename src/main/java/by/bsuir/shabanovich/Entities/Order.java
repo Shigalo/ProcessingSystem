@@ -19,13 +19,13 @@ public class Order {
     private Worker manager;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @JoinColumn(name = "nomenclature_id")
+    private Nomenclature nomenclature;
 
-    public Order(String data, Worker manager, Product product) {
+    public Order(String data, Worker manager, Nomenclature nomenclature) {
         this.data = data;
         this.manager = manager;
-        this.product = product;
+        this.nomenclature = nomenclature;
     }
 
     public Order() {
