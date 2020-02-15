@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity(name = "ordering")
+@Entity
 @Data
 public class Product {
 
@@ -27,6 +27,7 @@ public class Product {
         this.ordered = ordered;
         this.order = order;
         this.nomenclature = nomenclature;
+        done = 0;
     }
 
     public Product() {

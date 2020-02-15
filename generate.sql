@@ -27,8 +27,10 @@ CREATE UNIQUE INDEX nomenclature_article_uindex ON nomenclature (article);
 
 CREATE TABLE ordering(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    data varchar(45),
     manager_id int,
+    start_date date NOT NULL,
+    ready_date date DEFAULT null NULL,
+    send_date int DEFAULT null  NULL,
     CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE waybill(
@@ -51,5 +53,5 @@ CREATE TABLE product
     nomenclature_id int,
     ordered int NOT NULL,
     done int DEFAULT 0 NOT NULL,
-    CONSTRAINT product_order FOREIGN KEY (nomenclature_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT product_order FOREIGN KEY (order_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT product_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE);

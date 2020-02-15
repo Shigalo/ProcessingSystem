@@ -11,13 +11,13 @@
                             <label for="nomenclature" class="nubex1">Номенклатура:</label>
                             <select id="nomenclature" name="nomenclature" onchange="info()">
                                 <c:forEach items="${nomenclatures}" var="nomenclature">
-                                    <option>${nomenclature.article}</option>
+                                    <option value="${nomenclature.id}">${nomenclature.name} ${nomenclature.collection}</option>
                                 </c:forEach>
                             </select>
                         </td>
                         <td>
-                            <label for="numeric" class="nubex1">Количество:</label>
-                            <input type="number" min="1" step="1" class="form-control" id="numeric"  name="numeric" required>
+                            <label for="count" class="nubex1">Количество:</label>
+                            <input type="number" min="1" step="1" class="form-control" id="count"  name="count" required>
                         </td>
                     </tr>
                 </table>
@@ -34,15 +34,6 @@
         var order = document.getElementById("order");
         var row = order.insertRow(0);
         row.innerHTML = prod.innerHTML;
-    }
-    function info() {
-        alert(this.innerHTML);
-        <%--<c:forEach items="${nomenclatures}" var="nomenclature">
-        if (${nomenclature.article} === ){
-            alert(name);
-        }
-
-        </c:forEach>--%>
     }
 </script>
 <%@include file='../../parts/footer.jsp'%>

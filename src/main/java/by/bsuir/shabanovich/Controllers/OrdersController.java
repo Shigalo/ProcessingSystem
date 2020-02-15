@@ -40,20 +40,25 @@ public class OrdersController {
     }
 
     @PostMapping("/add")
-    public String addNomenclature(@RequestParam String[] nomenclature,
-                                  @RequestParam Integer[] numeric,
+    public String addNomenclature(@RequestParam Integer[] nomenclature,
+                                  @RequestParam Integer[] count,
                                   Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
-        for(String s : nomenclature) {
-            System.out.println(s + "\n");
-        }
-        for(Integer i : numeric) {
-            System.out.println(i + "\n");
-        }
+        orderService.addOrder(nomenclature, count);
 
 
         return "redirect:/orders/prepareList";
+    }
+
+    @GetMapping("/info/{id}")
+    public String edit(Model model, @PathVariable Integer id) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("products", orderService.findProducts(id));
+        return "orders/info";
     }
 
     /*@GetMapping("/edit/{id}")
