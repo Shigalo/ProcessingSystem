@@ -1,32 +1,57 @@
 package by.bsuir.shabanovich.Controllers;
 
-import by.bsuir.shabanovich.Services.NomenclatureService;
 import by.bsuir.shabanovich.Services.WorkerService;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
-@RequestMapping("/nomenclature")
-public class NomenclatureController {
+@RequestMapping("/delivery")
+public class DeliveryController {
 
     @Autowired
     WorkerService userService;
-
-    @Autowired
-    NomenclatureService nomenclatureService;
 
     @GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
-
-        model.addAttribute("nomenclatures", nomenclatureService.findAll());
-        return "nomenclatures/list";
+        return "deliveries/list";
     }
 
-    @GetMapping("/add")
+    @PostMapping("/list")
+    public String addNomenclature(@RequestParam MultipartFile file,
+                                  Model model) throws IOException {
+        model.addAttribute("isAdmin", userService.isAdmin());
+        model.addAttribute("isLogin", userService.isLogin());
+
+        XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
+        XSSFSheet worksheet = workbook.getSheetAt(0);
+
+        for(int i=1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+            XSSFRow row = worksheet.getRow(i);
+            System.out.println(row.getCell(0).getStringCellValue());
+            System.out.println(row.getCell(1).getStringCellValue());
+            System.out.println(row.getCell(2).getNumericCellValue());
+        }
+
+        return "redirect:/delivery/list";
+    }
+
+    /*@GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
@@ -73,15 +98,15 @@ public class NomenclatureController {
         return "redirect:/nomenclature/list";
     }
 
-   /* @GetMapping("/info/{id}")
+   *//* @GetMapping("/info/{id}")
     public String info(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "products/info";
-    }*/
+    }*//*
 
-    /*@PostMapping("/info/{id}")
+    *//*@PostMapping("/info/{id}")
     public String saveInfo(Model model, @PathVariable Integer id,
                            @RequestParam String name,
                            @RequestParam String type) {
@@ -89,7 +114,7 @@ public class NomenclatureController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         return "redirect:/products/info/" + id;
-    }*/
+    }*//*
 
     @GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable Integer id) {
@@ -98,5 +123,5 @@ public class NomenclatureController {
 
         nomenclatureService.deleteById(id);
         return "redirect:/nomenclature/list";
-    }
+    }*/
 }

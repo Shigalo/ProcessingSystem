@@ -30,7 +30,8 @@ CREATE TABLE ordering(
     manager_id int,
     start_date date NOT NULL,
     ready_date date DEFAULT null NULL,
-    send_date int DEFAULT null  NULL,
+    send_date date DEFAULT null  NULL,
+    status varchar(45) NOT NULL,
     CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE waybill(

@@ -7,6 +7,7 @@ import by.bsuir.shabanovich.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class OrderService {
 
     public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount) {
         Worker manager = workerService.getCurrentUser();
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
 
         Order order = new Order(date, manager);
         order = orderRepository.save(order);

@@ -31,7 +31,7 @@ public class NomenclatureService {
         nomenclatureRepository.save(nomenclature);
     }
 
-    public void editNomenclature(Integer id, String name, String factory, String count, String collection, String wholesale, String retail, String article) {
+    public void editNomenclature(Integer id, String name, String factory, String collection, String wholesale, String retail, String article) {
         Nomenclature nomenclature = nomenclatureRepository.findById(id);
         nomenclature.setName(name);
         nomenclature.setFactory(factory);
@@ -40,9 +40,5 @@ public class NomenclatureService {
         nomenclature.setRetail(Double.parseDouble(retail));
         nomenclature.setArticle(article);
         nomenclatureRepository.save(nomenclature);
-    }
-
-    public void remove(Integer id) {
-        nomenclatureRepository.deleteById(id);
     }
 }

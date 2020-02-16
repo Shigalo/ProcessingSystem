@@ -21,7 +21,7 @@ public class OrdersController {
     @Autowired
     OrderService orderService;
 
-    @GetMapping("/prepareList")
+    @GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
@@ -47,8 +47,7 @@ public class OrdersController {
         model.addAttribute("isLogin", userService.isLogin());
         orderService.addOrder(nomenclature, count);
 
-
-        return "redirect:/orders/prepareList";
+        return "redirect:/orders/list";
     }
 
     @GetMapping("/info/{id}")

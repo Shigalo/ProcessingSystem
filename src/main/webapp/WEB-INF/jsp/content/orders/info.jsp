@@ -4,27 +4,31 @@
     <div class="row" style="margin-top: 30px">
         <div class="col-md-offset-3 col-md-6">
             <div class="myclass">
-                <a class="command" href="${pageContext.request.contextPath}/orders/add">Добавить заказ</a>
-                <c:if test="${param.massage != null}"><div class="form-group">
-                    <label id="error"  style="color: red" >${param.massage}</label>
-                </div></c:if>
-                <table border="1">
-                    <tr>
-                        <td>ID</td>
-                        <td>Дата заказа</td>
-                        <td>Менеджер</td>
-                    </tr>
-                    <c:forEach items="${orders}" var="order">
-                        <tr>
-                            <td> ${order.id} </td>
-                            <td> ${order.startDate} </td>
-                            <td> ${order.manager.surname} ${order.manager.name}</td>
-                            <td><a href="/orders/info/${order.id}">Подробнее</a></td>
-                                <%--<td><a href="/orders/edit/${order.id}">Изменить</a></td>--%>
-                                <%--<td><a href="/orders/remove/${order.id}">Удалить</a></td>--%>
-                        </tr>
-                    </c:forEach>
-                </table>
+                <div id="order">
+                    <label>Order id: ${order.id}</label><br/>
+                    <label>Order date: ${order.startDate}</label><br/>
+                    <label>Ordered by: ${order.manager.surname} ${order.manager.name}</label><br/>
+                    <label>Date of receipt: ${order.ready}</label><br/>
+                    <label>Date of sending: ${order.send}</label><br/>
+                    <label>Status: ${order.status}</label><br/>
+                </div>
+                <br/><br/>
+                <div id="products">
+                    <h4>Состав:</h4>
+                    <ol>
+                        <c:forEach items="${products}" var="product">
+                            <li>Наименование    ${product.nomenclature.name};
+                                Артикул         ${product.nomenclature.article};
+                                Коллекция       ${product.nomenclature.collection};
+                                Фабрика         ${product.nomenclature.factory};
+                                Цена покупки    ${product.nomenclature.wholesale};
+                                Цена проджи     ${product.nomenclature.retail};
+                                Заказано        ${product.ordered};
+                                Изготовлено     ${product.done}
+                            </li>
+                        </c:forEach>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@
                             <td> ${user.id} </td>
                             <td> ${user.login} </td>
                             <td> ${user.password} </td>
-                            <td> ${user.getRoleName()} </td>
+                            <td> ${user.roleName} </td>
                             <td> ${user.name} </td>
                             <td> ${user.surname} </td>
                             <td><a href="/user/remove/${user.id}">Удалить</a></td>

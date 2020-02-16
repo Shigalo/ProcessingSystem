@@ -32,7 +32,7 @@
     var prod = document.getElementById("prod");
     function add() {
         var order = document.getElementById("order");
-        var row = order.insertRow(0);
+        var row = order.insertRow(-1);
         row.innerHTML = prod.innerHTML;
     }
 </script>

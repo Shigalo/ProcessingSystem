@@ -3,7 +3,7 @@ package by.bsuir.shabanovich.Entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity(name = "ordering")
 @Data
@@ -13,22 +13,28 @@ public class Order {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
+    String status;
+
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
     @Column(name = "ready_date")
-    private Date readyDate;
+    private LocalDate readyDate;
     @Column(name = "send_date")
-    private Date sendData;
+    private LocalDate sendDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_id")
     private Worker manager;
 
-    public Order(Date startDate, Worker manager) {
+    public Order(LocalDate startDate, Worker manager) {
         this.startDate = startDate;
         this.manager = manager;
+        status = "Отправлена";
     }
 
-    public Order() {
-    }
+    public Order() { }
+
+    public String getReady() { return (readyDate == null) ? "Заказ не готов" : readyDate.toString(); }
+
+    public String getSend() { return (sendDate == null) ? "Заказ не отправлен" : sendDate.toString(); }
 }
