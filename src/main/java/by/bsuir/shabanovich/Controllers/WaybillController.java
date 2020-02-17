@@ -1,10 +1,12 @@
 package by.bsuir.shabanovich.Controllers;
 
+import by.bsuir.shabanovich.Entities.Delivery;
+import by.bsuir.shabanovich.Services.DeliveryService;
+import by.bsuir.shabanovich.Services.WaybillService;
 import by.bsuir.shabanovich.Services.WorkerService;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +17,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-@RequestMapping("/delivery")
-public class DeliveryController {
+@RequestMapping("/waybill")
+public class WaybillController {
 
     @Autowired
     WorkerService userService;
+
+    @Autowired
+    WaybillService waybillService;
 
     @GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
-        return "deliveries/list";
+        return "waybills/list";
     }
 
     @PostMapping("/list")
@@ -38,17 +41,9 @@ public class DeliveryController {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
 
-        XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
-        XSSFSheet worksheet = workbook.getSheetAt(0);
+        waybillService.setDeliveries(file);
 
-        for(int i=1; i < worksheet.getPhysicalNumberOfRows(); i++) {
-            XSSFRow row = worksheet.getRow(i);
-            System.out.println(row.getCell(0).getStringCellValue());
-            System.out.println(row.getCell(1).getStringCellValue());
-            System.out.println(row.getCell(2).getNumericCellValue());
-        }
-
-        return "redirect:/delivery/list";
+        return "redirect:/waybill/list";
     }
 
     /*@GetMapping("/add")

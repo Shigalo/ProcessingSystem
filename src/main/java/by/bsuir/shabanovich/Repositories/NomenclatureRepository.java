@@ -10,6 +10,8 @@ public interface NomenclatureRepository extends JpaRepository<Nomenclature, Long
 
     public Nomenclature findById(Integer id);
 
+    public Nomenclature findByArticle(String article);
+
     @Transactional
     void deleteById(Integer id);
 }

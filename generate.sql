@@ -37,18 +37,19 @@ CREATE TABLE ordering(
 CREATE TABLE waybill(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     sum double,
+    date date,
     worker_id int,
     CONSTRAINT waybill_worker FOREIGN KEY (worker_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE delivery(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    date date,
-    factory varchar(45),
     waybill_id int,
+    nomenclature_id int,
+    count int NOT NULL,
+    CONSTRAINT delivery_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT delivery_waybill FOREIGN KEY (waybill_id) REFERENCES waybill (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
-CREATE TABLE product
-(
+CREATE TABLE product(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     order_id int NOT NULL,
     nomenclature_id int,

@@ -3,12 +3,11 @@ package by.bsuir.shabanovich.Services;
 import by.bsuir.shabanovich.Entities.*;
 import by.bsuir.shabanovich.Repositories.NomenclatureRepository;
 import by.bsuir.shabanovich.Repositories.OrderRepository;
-import by.bsuir.shabanovich.Repositories.ProductRepository;
+import by.bsuir.shabanovich.Repositories.ProductOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,7 +23,7 @@ public class OrderService {
     NomenclatureRepository nomenclatureRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    ProductOrderRepository productRepository;
 
     public List<Order> findAll() {
         return orderRepository.findAll();

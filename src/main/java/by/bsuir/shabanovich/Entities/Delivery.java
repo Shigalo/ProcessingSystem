@@ -2,7 +2,6 @@ package by.bsuir.shabanovich.Entities;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Entity
@@ -12,17 +11,20 @@ public class Delivery {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    LocalDate date;
-    String factory;
+    Integer count;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "waybill_id")
     private Waybill waybill;
 
-    public Delivery(LocalDate date, String factory, Waybill waybill) {
-        this.date = date;
-        this.factory = factory;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "nomenclature_id")
+    private Nomenclature nomenclature;
+
+    public Delivery(Integer count, Waybill waybill, Nomenclature nomenclature) {
+        this.count = count;
         this.waybill = waybill;
+        this.nomenclature = nomenclature;
     }
 
     public Delivery() { }

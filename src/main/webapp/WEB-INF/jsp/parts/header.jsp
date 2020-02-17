@@ -19,7 +19,7 @@
             <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
             <li><a href="${pageContext.request.contextPath}/nomenclature/list">Товары</a></li>
             <li><a href="${pageContext.request.contextPath}/orders/list">Заказы</a></li>
-            <li><a href="${pageContext.request.contextPath}/delivery/list">Поставки</a></li>
+            <li><a href="${pageContext.request.contextPath}/waybill/list">Поставки</a></li>
             <li><a href="/userForms">Заказы</a></li>
             <li><a href="#" onclick="this.parentNode.submit()">Выход</a></li>
         </ul>
