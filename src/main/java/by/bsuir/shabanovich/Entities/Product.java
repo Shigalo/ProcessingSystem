@@ -32,4 +32,8 @@ public class Product {
 
     public Product() {
     }
+
+    public void incerment(int count) {
+        done += count;
+    }
 }

@@ -1,19 +1,12 @@
 package by.bsuir.shabanovich.Controllers;
 
-import by.bsuir.shabanovich.Entities.Delivery;
 import by.bsuir.shabanovich.Services.DeliveryService;
 import by.bsuir.shabanovich.Services.WaybillService;
 import by.bsuir.shabanovich.Services.WorkerService;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -28,10 +21,15 @@ public class WaybillController {
     @Autowired
     WaybillService waybillService;
 
+    @Autowired
+    DeliveryService deliveryService;
+
     @GetMapping("/list")
     public String addTransport(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
+
+        model.addAttribute("waybills", waybillService.findAll());
         return "waybills/list";
     }
 
@@ -45,6 +43,17 @@ public class WaybillController {
 
         return "redirect:/waybill/list";
     }
+
+    @GetMapping("/info/{id}")
+    public String edit(Model model, @PathVariable Integer id) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        model.addAttribute("waybill", waybillService.findById(id));
+        model.addAttribute("deliveries", waybillService.findDeliveries(id));
+        return "waybills/info";
+    }
+
 
     /*@GetMapping("/add")
     public String add(Model model) {

@@ -32,6 +32,7 @@ CREATE TABLE ordering(
     ready_date date DEFAULT null NULL,
     send_date date DEFAULT null  NULL,
     status varchar(45) NOT NULL,
+    sum double NULL,
     CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE waybill(
@@ -57,3 +58,10 @@ CREATE TABLE product(
     done int DEFAULT 0 NOT NULL,
     CONSTRAINT product_order FOREIGN KEY (order_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT product_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE);
+
+use processing;
+
+delete from waybill;
+
+update product
+set done = 0;

@@ -3,7 +3,7 @@ package by.bsuir.shabanovich.Services;
 import by.bsuir.shabanovich.Entities.*;
 import by.bsuir.shabanovich.Repositories.NomenclatureRepository;
 import by.bsuir.shabanovich.Repositories.OrderRepository;
-import by.bsuir.shabanovich.Repositories.ProductOrderRepository;
+import by.bsuir.shabanovich.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class OrderService {
     NomenclatureRepository nomenclatureRepository;
 
     @Autowired
-    ProductOrderRepository productRepository;
+    ProductRepository productRepository;
 
     public List<Order> findAll() {
         return orderRepository.findAll();
@@ -37,12 +37,17 @@ public class OrderService {
 
         Order order = new Order(date, manager);
         order = orderRepository.save(order);
+
+        double sum = 0;
         for(int i = 0; i < nomenclatureId.length; i++) {
             Integer ordered = nomenclatureCount[i];
             Nomenclature nomenclature = nomenclatureRepository.findById(nomenclatureId[i]);
             Product product = new Product(ordered, order, nomenclature);
             productRepository.save(product);
+            sum += product.getOrdered() * nomenclature.getRetail();
         }
+        order.setSum(sum);
+        orderRepository.save(order);
     }
 
     public List<Product> findProducts(Integer id) {

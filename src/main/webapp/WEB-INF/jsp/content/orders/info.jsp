@@ -7,6 +7,7 @@
                 <div id="order">
                     <label>Order id: ${order.id}</label><br/>
                     <label>Order date: ${order.startDate}</label><br/>
+                    <label>Order cost: ${order.sum}</label><br/>
                     <label>Ordered by: ${order.manager.surname} ${order.manager.name}</label><br/>
                     <label>Date of receipt: ${order.ready}</label><br/>
                     <label>Date of sending: ${order.send}</label><br/>

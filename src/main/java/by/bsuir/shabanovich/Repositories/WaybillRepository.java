@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WaybillRepository extends JpaRepository<Waybill, Long> {
+
+    public Waybill findById(Integer id);
 }

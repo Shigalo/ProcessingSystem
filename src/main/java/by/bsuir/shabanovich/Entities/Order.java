@@ -14,6 +14,7 @@ public class Order {
     private Integer id;
 
     String status;
+    Double sum;
 
     @Column(name = "start_date")
     private LocalDate startDate;

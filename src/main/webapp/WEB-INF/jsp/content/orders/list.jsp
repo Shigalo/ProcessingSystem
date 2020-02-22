@@ -12,12 +12,14 @@
                     <tr>
                         <td>ID</td>
                         <td>Дата заказа</td>
+                        <td>Сумма заказа</td>
                         <td>Менеджер</td>
                     </tr>
                     <c:forEach items="${orders}" var="order">
                         <tr>
                             <td> ${order.id} </td>
                             <td> ${order.startDate} </td>
+                            <td> ${order.sum} </td>
                             <td> ${order.manager.surname} ${order.manager.name}</td>
                             <td><a href="/orders/info/${order.id}">Подробнее</a></td>
                                 <%--<td><a href="/orders/edit/${order.id}">Изменить</a></td>--%>

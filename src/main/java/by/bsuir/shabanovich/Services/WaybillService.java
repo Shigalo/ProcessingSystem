@@ -9,13 +9,13 @@ import by.bsuir.shabanovich.Repositories.WaybillRepository;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class WaybillService {
@@ -32,6 +32,13 @@ public class WaybillService {
     @Autowired
     DeliveryRepository deliveryRepository;
 
+    @Autowired
+    ProductService productService;
+
+    public List<Waybill> findAll() {
+        return waybillRepository.findAll();
+    }
+
     public void setDeliveries(MultipartFile file) throws IOException {
 
         Waybill waybill = new Waybill();
@@ -43,6 +50,8 @@ public class WaybillService {
         XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
         XSSFSheet worksheet = workbook.getSheetAt(0);
 
+        double sum = 0;;
+
         for(int i=1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             XSSFRow row = worksheet.getRow(i);
 
@@ -51,7 +60,22 @@ public class WaybillService {
             Nomenclature nomenclature = nomenclatureRepository.findByArticle(article);
 
             Delivery delivery = new Delivery(count, waybill, nomenclature);
-            deliveryRepository.save(delivery);
+            delivery = deliveryRepository.save(delivery);
+
+            productService.newSupply(delivery);
+            sum += delivery.getCount() * nomenclature.getWholesale();
         }
+
+        waybill.setSum(sum);
+        waybillRepository.save(waybill);
+    }
+
+    public Waybill findById(Integer id) {
+        return waybillRepository.findById(id);
+    }
+
+    public List<Delivery> findDeliveries(Integer id) {
+        Waybill waybill = waybillRepository.findById(id);
+        return deliveryRepository.findByWaybill(waybill);
     }
 }
