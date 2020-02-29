@@ -1,6 +1,7 @@
 package by.bsuir.shabanovich.Controllers;
 
 import by.bsuir.shabanovich.Services.DeliveryService;
+import by.bsuir.shabanovich.Services.OrderService;
 import by.bsuir.shabanovich.Services.WaybillService;
 import by.bsuir.shabanovich.Services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/waybill")
+@RequestMapping("/waybills")
 public class WaybillController {
 
     @Autowired
@@ -23,6 +24,9 @@ public class WaybillController {
 
     @Autowired
     DeliveryService deliveryService;
+
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/list")
     public String addTransport(Model model) {
@@ -40,8 +44,8 @@ public class WaybillController {
         model.addAttribute("isLogin", userService.isLogin());
 
         waybillService.setDeliveries(file);
-
-        return "redirect:/waybill/list";
+        orderService.check();
+        return "redirect:/waybills/list";
     }
 
     @GetMapping("/info/{id}")

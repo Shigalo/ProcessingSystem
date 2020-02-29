@@ -22,13 +22,23 @@ public class OrdersController {
     OrderService orderService;
 
     @GetMapping("/list")
-    public String addTransport(Model model) {
+    public String list(Model model) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
         model.addAttribute("orders", orderService.findAll());
         return "orders/list";
     }
+
+    @GetMapping("/ready")
+    public String readyList(Model model) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        model.addAttribute("orders", orderService.findReady());
+        return "orders/list";
+    }
+
 
     @GetMapping("/add")
     public String add(Model model) {

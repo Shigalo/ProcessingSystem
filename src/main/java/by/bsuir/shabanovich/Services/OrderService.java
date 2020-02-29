@@ -29,6 +29,10 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> findReady() {
+        return orderRepository.findAllByStatus("Собран");
+    }
+
     public Order findById(Integer id) { return orderRepository.findById(id); }
 
     public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount) {
@@ -53,6 +57,24 @@ public class OrderService {
     public List<Product> findProducts(Integer id) {
         Order order = orderRepository.findById(id);
         return productRepository.findByOrder(order);
+    }
+
+    public void check() {
+        List<Order> orderList = orderRepository.findAllByStatus("Отправлена");
+        for(Order order : orderList) {
+            List<Product> productList = productRepository.findByOrder(order);
+            boolean ready = true;
+            for(Product product : productList) {
+                ready = product.getOrdered().equals(product.getDone());
+                if(!ready) break;
+            }
+            if(ready) {
+                LocalDate readyDate = LocalDate.now();
+                order.setStatus("Собран");
+                order.setReadyDate(readyDate);
+                orderRepository.save(order);
+            }
+        }
     }
 
 }

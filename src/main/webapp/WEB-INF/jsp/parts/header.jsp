@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
 </head>
 <body>
-<%--<c:if test="${isLogin}">--%>
+<c:if test="${isLogin}">
 <div class="container">
     <nav class="navbar navbar-default">
         <form action="${pageContext.request.contextPath}/logout" method="post">
@@ -19,12 +19,12 @@
             <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
             <li><a href="${pageContext.request.contextPath}/nomenclature/list">Товары</a></li>
             <li><a href="${pageContext.request.contextPath}/orders/list">Заказы</a></li>
-            <li><a href="${pageContext.request.contextPath}/waybill/list">Поставки</a></li>
-            <li><a href="/userForms">Заказы</a></li>
-            <li><a href="#" onclick="this.parentNode.submit()">Выход</a></li>
+            <li><a href="${pageContext.request.contextPath}/waybills/list">Поставки</a></li>
+            <li><a href="${pageContext.request.contextPath}/orders/ready">Собранные заказы</a></li>
+            <li><a href="#" onclick="this.parentNode.parentNode.parentNode.submit()">Выход</a></li>
         </ul>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
         </form>
     </nav>
 </div>
-<%--</c:if>--%>
+</c:if>
