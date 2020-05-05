@@ -1,5 +1,8 @@
+<script src="//maps.google.com/maps?file=api&amp;amp;amp;amp;v=2&amp;amp;amp;amp;sensor=false&amp;amp;amp;amp;key=ABQIAAAAzr2EBOXUKnm_jVnk0OJI7xSosDVG8KKPE1-m51RBrvYughuyMxQ-i1QfUnH94QxWIa6N4U6MouMmBA"
+        type="text/javascript"></script>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file='../../parts/header.jsp'%>
+<body onload="initialize()" onunload="GUnload()">
 <div class="container-fluid" >
     <div class="row" style="margin-top: 30px">
         <div class="col-md-offset-3 col-md-6">
@@ -33,5 +36,5 @@
         </div>
     </div>
 </div>
+</body>
 <%@include file='../../parts/footer.jsp'%>
-

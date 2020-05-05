@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file='../../parts/header.jsp'%>
+<body>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
@@ -24,6 +25,8 @@
         </div>
     </div>
 </div>
+
+</body>
 <style>
     .validation-text {
         color: red;

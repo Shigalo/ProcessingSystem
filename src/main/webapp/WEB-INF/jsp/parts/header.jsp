@@ -8,23 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <c:if test="${isLogin}">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <form action="${pageContext.request.contextPath}/logout" method="post">
+                    <ul class="nav navbar-nav">
+                        <li><a href="${pageContext.request.contextPath}/user/profile">Профиль</a></li>
+                        <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
+                        <li><a href="${pageContext.request.contextPath}/nomenclature/list">Товары</a></li>
+                        <li><a href="${pageContext.request.contextPath}/orders/list">Заказы</a></li>
+                        <li><a href="${pageContext.request.contextPath}/waybills/list">Поставки</a></li>
+                        <li><a href="${pageContext.request.contextPath}/orders/ready">Собранные заказы</a></li>
+                        <li><a href="#" onclick="this.parentNode.parentNode.parentNode.submit()">Выход</a></li>
+                    </ul>
+                    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                </form>
+            </nav>
+        </div>
+    </c:if>
 </head>
-<body>
-<c:if test="${isLogin}">
-<div class="container">
-    <nav class="navbar navbar-default">
-        <form action="${pageContext.request.contextPath}/logout" method="post">
-        <ul class="nav navbar-nav">
-            <li><a href="${pageContext.request.contextPath}/user/profile">Профиль</a></li>
-            <li><a href="${pageContext.request.contextPath}/workers/">Сотрудники</a></li>
-            <li><a href="${pageContext.request.contextPath}/nomenclature/list">Товары</a></li>
-            <li><a href="${pageContext.request.contextPath}/orders/list">Заказы</a></li>
-            <li><a href="${pageContext.request.contextPath}/waybills/list">Поставки</a></li>
-            <li><a href="${pageContext.request.contextPath}/orders/ready">Собранные заказы</a></li>
-            <li><a href="#" onclick="this.parentNode.parentNode.parentNode.submit()">Выход</a></li>
-        </ul>
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-        </form>
-    </nav>
-</div>
-</c:if>

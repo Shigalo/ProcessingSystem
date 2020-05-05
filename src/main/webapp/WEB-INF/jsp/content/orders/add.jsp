@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@include file='../../parts/header.jsp'%>
-
+<body>
 <div class="container-fluid">
     <div class="row" style="margin-top: 30px">
         <div class="col-md-6 offset-3">
@@ -28,6 +28,8 @@
         </div>
     </div>
 </div>
+</body>
+
 <script>
     var prod = document.getElementById("prod");
     function add() {

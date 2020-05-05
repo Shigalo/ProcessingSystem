@@ -4,6 +4,7 @@ import by.bsuir.shabanovich.Services.DeliveryService;
 import by.bsuir.shabanovich.Services.OrderService;
 import by.bsuir.shabanovich.Services.WaybillService;
 import by.bsuir.shabanovich.Services.WorkerService;
+import by.bsuir.shabanovich.Supporting.WordReportCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,13 @@ public class WaybillController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         model.addAttribute("waybills", waybillService.findAll());
+
+        WordReportCreator creator = new WordReportCreator("D:/Sasha/Word Test.docx");
+
+        for(int i = 1; i < 11; i++)
+            creator.PushData(String.valueOf(i), String.valueOf(i * 10 + 5));
+        creator.Create();
+
         return "waybills/list";
     }
 
