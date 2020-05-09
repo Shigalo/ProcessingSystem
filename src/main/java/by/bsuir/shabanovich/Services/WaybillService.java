@@ -50,7 +50,7 @@ public class WaybillService {
         XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
         XSSFSheet worksheet = workbook.getSheetAt(0);
 
-        double sum = 0;;
+        double sum = 0;
 
         for(int i=1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             XSSFRow row = worksheet.getRow(i);

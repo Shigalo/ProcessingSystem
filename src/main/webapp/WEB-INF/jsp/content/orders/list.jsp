@@ -15,7 +15,7 @@
                     <tr>
                         <td>ID</td>
                         <td>Дата заказа</td>
-                        <c:if test="${isAdmin}"><td>Собран</td></c:if>
+                        <c:if test="${isAdmin}"><td>Статус</td></c:if>
                         <td>Сумма заказа</td>
                         <td>Менеджер</td>
                     </tr>
@@ -23,7 +23,7 @@
                         <tr>
                             <td> ${order.id} </td>
                             <td> ${order.startDate} </td>
-                            <c:if test="${isAdmin}"><td> ${order.readyDate}</td></c:if>
+                            <c:if test="${isAdmin}"><td> ${order.GetStatus()}</td></c:if>
                             <td> ${order.sum} </td>
                             <td> ${order.manager.surname} ${order.manager.name}</td>
                             <td><a href="/orders/info/${order.id}">Подробнее</a></td>

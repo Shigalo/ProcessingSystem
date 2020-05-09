@@ -50,12 +50,14 @@ public class OrdersController {
     }
 
     @PostMapping("/add")
-    public String addNomenclature(@RequestParam Integer[] nomenclature,
+    public String addNomenclature(@RequestParam String name,
+                                  @RequestParam String address,
+                                  @RequestParam Integer[] nomenclature,
                                   @RequestParam Integer[] count,
                                   Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
-        orderService.addOrder(nomenclature, count);
+        orderService.addOrder(nomenclature, count, name, address);
 
         return "redirect:/orders/list";
     }
@@ -114,12 +116,12 @@ public class OrdersController {
         return "redirect:/products/info/" + id;
     }*/
 
-    /*@GetMapping("/remove/{id}")
+    @GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable Integer id) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        nomenclatureService.remove(id);
+        orderService.remove(id);
         return "redirect:/orders/list";
-    }*/
+    }
 }

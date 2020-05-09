@@ -15,6 +15,9 @@ CREATE TABLE user_role(
     role varchar(45),
     CONSTRAINT user_role_worker FOREIGN KEY (user_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
 
+INSERT INTO `processing`.`worker` VALUES (1, 'a', 'a', 1, 'a', 'a');
+INSERT INTO `processing`.`user_role` (`user_id`, `role`) VALUES (1, 'ADMIN');
+
 CREATE TABLE nomenclature(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name varchar(45) NOT NULL,
@@ -25,15 +28,24 @@ CREATE TABLE nomenclature(
     article varchar(45) NOT NULL);
 CREATE UNIQUE INDEX nomenclature_article_uindex ON nomenclature (article);
 
+CREATE TABLE customer(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name varchar(45) NOT NULL,
+    address varchar(255),
+    send_date date DEFAULT null,
+    payment int DEFAULT null);
+
 CREATE TABLE ordering(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     manager_id int,
     start_date date NOT NULL,
     ready_date date DEFAULT null NULL,
     send_date date DEFAULT null  NULL,
-    status varchar(45) NOT NULL,
+    status int NOT NULL,
     sum double NULL,
-    CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE);
+    customer_id int NOT NULL,
+    CONSTRAINT ordering_customer FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE,);
 
 CREATE TABLE waybill(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -58,10 +70,3 @@ CREATE TABLE product(
     done int DEFAULT 0 NOT NULL,
     CONSTRAINT product_order FOREIGN KEY (order_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT product_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE);
-
-use processing;
-
-delete from waybill;
-
-update product
-set done = 0;

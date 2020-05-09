@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,21 +26,27 @@ public class OrderService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    CustomerService customerService;
+
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
 
     public List<Order> findReady() {
-        return orderRepository.findAllByStatus("Собран");
+        return orderRepository.findAllByStatus(Status.READY);
     }
 
     public Order findById(Integer id) { return orderRepository.findById(id); }
 
-    public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount) {
+    public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount, String name, String address) {
+        Customer customer = customerService.add(name, address);
+
         Worker manager = workerService.getCurrentUser();
         LocalDate date = LocalDate.now();
 
         Order order = new Order(date, manager);
+        order.setCustomer(customer);
         order = orderRepository.save(order);
 
         double sum = 0;
@@ -60,7 +67,7 @@ public class OrderService {
     }
 
     public void check() {
-        List<Order> orderList = orderRepository.findAllByStatus("Отправлена");
+        List<Order> orderList = orderRepository.findAllByStatus(Status.PROCESSING);
         for(Order order : orderList) {
             List<Product> productList = productRepository.findByOrder(order);
             boolean ready = true;
@@ -70,11 +77,15 @@ public class OrderService {
             }
             if(ready) {
                 LocalDate readyDate = LocalDate.now();
-                order.setStatus("Собран");
+                order.setStatus(Status.READY);
                 order.setReadyDate(readyDate);
                 orderRepository.save(order);
             }
         }
+    }
+
+    public void remove(int id) {
+        orderRepository.deleteById(id);
     }
 
 }

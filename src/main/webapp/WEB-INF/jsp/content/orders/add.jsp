@@ -5,6 +5,13 @@
     <div class="row" style="margin-top: 30px">
         <div class="col-md-6 offset-3">
             <form method="post" action="" id="quiz">
+                <div id="customer">
+                    <label for="name" class="nubex1">Заказчик:</label>
+                    <input type="text"class="form-control" id="name" name="name" required>
+                    <label for="address" class="nubex1">Адрес:</label>
+                    <input type="text"class="form-control" id="address" name="address" required>
+                </div>
+
                 <table id="order">
                     <tr id="prod">
                         <td>

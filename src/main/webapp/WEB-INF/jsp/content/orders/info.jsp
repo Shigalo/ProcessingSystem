@@ -11,8 +11,8 @@
                     <label>Order cost: ${order.sum}</label><br/>
                     <label>Ordered by: ${order.manager.surname} ${order.manager.name}</label><br/>
                     <label>Date of receipt: ${order.ready}</label><br/>
-                    <label>Date of sending: ${order.send}</label><br/>
-                    <label>Status: ${order.status}</label><br/>
+                    <label>Date of sending: ${order.customer.send}</label><br/>
+                    <label>Status: ${order.getStatusText()}</label><br/>
                 </div>
                 <br/><br/>
                 <div id="products">

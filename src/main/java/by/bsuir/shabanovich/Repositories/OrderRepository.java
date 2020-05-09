@@ -1,11 +1,9 @@
 package by.bsuir.shabanovich.Repositories;
 
-import by.bsuir.shabanovich.Entities.Delivery;
 import by.bsuir.shabanovich.Entities.Order;
-import by.bsuir.shabanovich.Entities.Worker;
+import by.bsuir.shabanovich.Entities.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +11,8 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     public Order findById(Integer id);
 
-    public List<Order> findAllByStatus(String status);
+    public List<Order> findAllByStatus(Status status);
+
+    public void deleteById(int id);
 
 }
