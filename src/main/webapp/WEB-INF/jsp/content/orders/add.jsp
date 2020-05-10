@@ -7,9 +7,9 @@
             <form method="post" action="" id="quiz">
                 <div id="customer">
                     <label for="name" class="nubex1">Заказчик:</label>
-                    <input type="text"class="form-control" id="name" name="name" required>
+                    <input type="text" class="form-control" id="name" name="name" required>
                     <label for="address" class="nubex1">Адрес:</label>
-                    <input type="text"class="form-control" id="address" name="address" required>
+                    <input type="text" class="form-control" id="address" name="address" required>
                 </div>
 
                 <table id="order">

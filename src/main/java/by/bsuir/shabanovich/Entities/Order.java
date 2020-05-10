@@ -33,6 +33,8 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    private Integer position;
+
     public Order(LocalDate startDate, Worker manager) {
         this.startDate = startDate;
         this.manager = manager;

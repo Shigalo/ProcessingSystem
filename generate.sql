@@ -44,6 +44,7 @@ CREATE TABLE ordering(
     status int NOT NULL,
     sum double NULL,
     customer_id int NOT NULL,
+    position int DEFAULT null NULL,
     CONSTRAINT ordering_customer FOREIGN KEY (customer_id) REFERENCES customer (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT order_manager FOREIGN KEY (manager_id) REFERENCES worker (id) ON DELETE CASCADE ON UPDATE CASCADE,);
 

@@ -1,12 +1,26 @@
 package by.bsuir.shabanovich.Controllers;
 
+import by.bsuir.shabanovich.Entities.Order;
 import by.bsuir.shabanovich.Services.OrderService;
 import by.bsuir.shabanovich.Services.NomenclatureService;
 import by.bsuir.shabanovich.Services.WorkerService;
+import by.bsuir.shabanovich.Supporting.WordReportCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
@@ -36,7 +50,7 @@ public class OrdersController {
         model.addAttribute("isAdmin", userService.isAdmin());
 
         model.addAttribute("orders", orderService.findReady());
-        return "orders/list";
+        return "orders/ready";
     }
 
 
@@ -72,49 +86,57 @@ public class OrdersController {
         return "orders/info";
     }
 
-    /*@GetMapping("/edit/{id}")
-    public String edit(Model model, @PathVariable Integer id) {
+    @GetMapping("/route")
+    public String route(Model model, @RequestParam String ids) {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        model.addAttribute("nomenclature", nomenclatureService.findById(id));
-        return "orders/edit";
+        List<String> list = Arrays.asList(ids.split(","));
+        List<Order> orderList = new ArrayList<>();
+        for(String s : list)
+            orderList.add(orderService.findById(Integer.valueOf(s)));
+        for(int i = 0; i < orderList.size();)
+            orderList.get(i).setPosition(++i);
+
+        model.addAttribute("orders", orderList);
+        return "/orders/route";
     }
 
-    @PostMapping("/edit/{id}")
-    public String editNomenclature(@PathVariable Integer id,
-                                   @RequestParam String name,
-                                   @RequestParam String factory,
-                                   @RequestParam String count,
-                                   @RequestParam String collection,
-                                   @RequestParam String wholesale,
-                                   @RequestParam String retail,
-                                   @RequestParam String article,
-                                   Model model) {
-        model.addAttribute("isAdmin", userService.isAdmin());
-        model.addAttribute("isLogin", userService.isLogin());
-        nomenclatureService.editNomenclature(id, name, factory, count, collection, wholesale, retail, article);
+    private String path;
 
-        return "redirect:/orders/list";
+    @PostMapping("/route")
+    public String print(Model model,
+                        @RequestParam String date,
+                        @RequestParam Integer[] pos) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
+
+        System.out.println(date);
+        for(int i : pos){
+            System.out.println(i);
+        }
+        path = "D:\\" + date + " route.docx";
+
+        WordReportCreator creator = new WordReportCreator(path);
+
+        for(int i = 1; i < 11; i++)
+            creator.PushData(String.valueOf(i), String.valueOf(i * 10 + 5));
+        creator.Create();
+
+        return "/orders/download";
     }
-*/
-   /* @GetMapping("/info/{id}")
-    public String info(Model model, @PathVariable Integer id) {
-        model.addAttribute("isLogin", userService.isLogin());
-        model.addAttribute("isAdmin", userService.isAdmin());
 
-        return "products/info";
-    }*/
+    @RequestMapping(value = "/file", method = RequestMethod.GET)
+    public void getSteamingFile1(HttpServletResponse response) throws IOException {
+        response.setContentType("application/docx");
 
-    /*@PostMapping("/info/{id}")
-    public String saveInfo(Model model, @PathVariable Integer id,
-                           @RequestParam String name,
-                           @RequestParam String type) {
-        model.addAttribute("isLogin", userService.isLogin());
-        model.addAttribute("isAdmin", userService.isAdmin());
-
-        return "redirect:/products/info/" + id;
-    }*/
+        response.setHeader("Content-Disposition", "attachment; filename=\"route.docx\"");
+        InputStream inputStream = new FileInputStream(new File(path));
+        int nRead;
+        while ((nRead = inputStream.read()) != -1) {
+            response.getWriter().write(nRead);
+        }
+    }
 
     @GetMapping("/remove/{id}")
     public String remove(Model model, @PathVariable Integer id) {

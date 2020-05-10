@@ -36,12 +36,6 @@ public class WaybillController {
 
         model.addAttribute("waybills", waybillService.findAll());
 
-        WordReportCreator creator = new WordReportCreator("D:/Sasha/Word Test.docx");
-
-        for(int i = 1; i < 11; i++)
-            creator.PushData(String.valueOf(i), String.valueOf(i * 10 + 5));
-        creator.Create();
-
         return "waybills/list";
     }
 

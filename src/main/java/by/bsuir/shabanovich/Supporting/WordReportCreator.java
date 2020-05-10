@@ -1,12 +1,8 @@
 package by.bsuir.shabanovich.Supporting;
 
 import org.apache.poi.xwpf.usermodel.*;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblGrid;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblGridCol;
 
 import java.io.FileOutputStream;
-import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class WordReportCreator {
@@ -51,7 +47,9 @@ public class WordReportCreator {
                 }
             }
 
-            FileOutputStream outputStream = new FileOutputStream(/*"D:/Sasha/Word Test.docx"*/path);
+            System.out.println(getClass().getClassLoader().getResource("Route"));
+
+            FileOutputStream outputStream = new FileOutputStream(path);
             docxModel.write(outputStream);
             outputStream.close();
         } catch (Exception e) {
@@ -59,4 +57,6 @@ public class WordReportCreator {
         }
         System.out.println("Успешно записан в файл");
     }
+
+
  }
