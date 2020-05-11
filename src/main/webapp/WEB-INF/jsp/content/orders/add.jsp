@@ -10,8 +10,13 @@
                     <input type="text" class="form-control" id="name" name="name" required>
                     <label for="address" class="nubex1">Адрес:</label>
                     <input type="text" class="form-control" id="address" name="address" required>
+                    <label for="payment" class="nubex1">Тип оплаты:</label>
+                    <select id="payment" name="payment" required>
+                        <option value="card">Картой</option>
+                        <option value="cash">Наличными</option>
+                        <option value="unknown" selected>Не задано</option>
+                    </select>
                 </div>
-
                 <table id="order">
                     <tr id="prod">
                         <td>

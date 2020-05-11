@@ -35,4 +35,8 @@ public class ProductService {
         }
 
     }
+
+    public List<Product> getProductsByOrder(Order order) {
+        return productRepository.findByOrder(order);
+    }
 }

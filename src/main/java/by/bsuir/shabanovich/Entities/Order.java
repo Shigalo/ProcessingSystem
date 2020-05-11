@@ -46,9 +46,9 @@ public class Order {
     public String getReady() { return (readyDate == null) ? "Заказ не готов" : readyDate.toString(); }
 
     public String getStatusText() {
-        if(status == Status.READY) return "Собран";
+        if(status == Status.READY)      return "Собран";
         if(status == Status.PROCESSING) return "Обрабатывается";
-        if(status == Status.DONE) return "Отправлен";
+        if(status == Status.DONE)       return "Отправлен";
         return "Пользователь";
     }
 
@@ -56,5 +56,17 @@ public class Order {
         if(status == Status.READY) return "Собран " + readyDate.toString();
         if(status == Status.DONE) return "Отправлен" + customer.getSendDate().toString();
         return "Обрабатывается";
+    }
+
+    public String GetReady() {
+        if(readyDate == null)
+            return "Изготавливается";
+        return readyDate.toString();
+    }
+
+    public String GetSend() {
+        if(readyDate == null)
+            return "Не назначено (Изготавливается)";
+        return customer.GetSend();
     }
 }

@@ -6,10 +6,10 @@
         <div class="col-md-offset-3 col-md-6">
             <div class="myclass">
                 <div id="waybill">
-                    <label>Waybill id: ${waybill.id}</label><br/>
-                    <label>Waybill date: ${waybill.date}</label><br/>
-                    <label>Waybill cost: ${waybill.sum}</label><br/>
-                    <label>Added by: ${waybill.worker.surname} ${waybill.worker.name}</label><br/>
+                    <label>ID: ${waybill.id}</label><br/>
+                    <label>Дата поставки: ${waybill.date}</label><br/>
+                    <label>Цена поставки: ${waybill.sum}</label><br/>
+                    <label>Принято: ${waybill.worker.surname} ${waybill.worker.name}</label><br/>
                 </div>
                 <br/><br/>
                 <div id="deliveries">

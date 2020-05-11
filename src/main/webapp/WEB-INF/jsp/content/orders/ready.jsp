@@ -35,12 +35,12 @@
                             <td> ${order.startDate} </td>
                             <td> ${order.GetStatus()}</td>
                             <td> <input type="checkbox" id="selected" name="selected" value="selected" class="sel">
-                                <label for="selected"> Включить</label><br></td>
+                                <label for="selected">Включить в доставку</label><br></td>
                         </tr>
                     </c:forEach>
                 </table>
 
-                <button onclick="get()">Get</button>
+                <button onclick="get()">Перейти к распределению</button>
 
             </div>
         </div>

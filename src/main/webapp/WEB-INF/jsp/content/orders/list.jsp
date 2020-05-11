@@ -28,7 +28,7 @@
                             <td> ${order.manager.surname} ${order.manager.name}</td>
                             <td><a href="/orders/info/${order.id}">Подробнее</a></td>
                                 <%--<td><a href="/orders/edit/${order.id}">Изменить</a></td>--%>
-                                <%--<td><a href="/orders/remove/${order.id}">Удалить</a></td>--%>
+                            <td><a href="/orders/remove/${order.id}">Удалить</a></td>
                         </tr>
                     </c:forEach>
                 </table>

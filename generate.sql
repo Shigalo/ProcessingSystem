@@ -33,7 +33,7 @@ CREATE TABLE customer(
     name varchar(45) NOT NULL,
     address varchar(255),
     send_date date DEFAULT null,
-    payment int DEFAULT null);
+    payment int NOT NULL);
 
 CREATE TABLE ordering(
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -71,3 +71,16 @@ CREATE TABLE product(
     done int DEFAULT 0 NOT NULL,
     CONSTRAINT product_order FOREIGN KEY (order_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT product_nomenclature FOREIGN KEY (nomenclature_id) REFERENCES nomenclature (id) ON DELETE CASCADE ON UPDATE CASCADE);
+
+CREATE TABLE route(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    date date NOT NULL);
+REATE UNIQUE INDEX route_date_uindex ON route (date);
+
+CREATE TABLE route_data(
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    route_id int NOT NULL,
+    order_id int NOT NULL,
+    position int NOT NULL,
+    CONSTRAINT route_data_route FOREIGN KEY (route_id) REFERENCES route (id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT route_data_order FOREIGN KEY (order_id) REFERENCES ordering (id) ON DELETE CASCADE ON UPDATE CASCADE);

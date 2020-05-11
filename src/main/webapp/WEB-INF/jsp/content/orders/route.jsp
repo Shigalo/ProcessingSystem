@@ -29,7 +29,7 @@
                         </c:forEach>
                     </table>
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                    <button type="submit" class="btn btn-primary">Next</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
         </div>

@@ -33,5 +33,20 @@ public class Customer {
 
     public Customer() {
     }
+
+    public String GetPayment() {
+        switch (payment) {
+            case CARD:      return "Карта";
+            case CASH:      return "Наличные";
+            case UNKNOWN:   return "Не задано";
+        }
+        return "Не задано";
+    }
+
+    public String GetSend() {
+        if(sendDate == null)
+            return "Не назаначено";
+        return sendDate.toString();
+    }
 }
 

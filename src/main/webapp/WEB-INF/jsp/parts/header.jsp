@@ -19,6 +19,7 @@
                         <li><a href="${pageContext.request.contextPath}/orders/list">Заказы</a></li>
                         <li><a href="${pageContext.request.contextPath}/waybills/list">Поставки</a></li>
                         <li><a href="${pageContext.request.contextPath}/orders/ready">Собранные заказы</a></li>
+                        <li><a href="${pageContext.request.contextPath}/orders/download">Доставки</a></li>
                         <li><a href="#" onclick="this.parentNode.parentNode.parentNode.submit()">Выход</a></li>
                     </ul>
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />

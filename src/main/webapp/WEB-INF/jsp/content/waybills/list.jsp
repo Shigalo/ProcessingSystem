@@ -27,8 +27,6 @@
                             <td> ${waybill.sum} </td>
                             <td> ${waybill.worker.surname} ${waybill.worker.name}</td>
                             <td><a href="/waybills/info/${waybill.id}">Подробнее</a></td>
-                                <%--<td><a href="/orders/edit/${order.id}">Изменить</a></td>--%>
-                                <%--<td><a href="/orders/remove/${order.id}">Удалить</a></td>--%>
                         </tr>
                     </c:forEach>
                 </table>

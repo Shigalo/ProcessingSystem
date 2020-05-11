@@ -6,13 +6,18 @@
         <div class="col-md-offset-3 col-md-6">
             <div class="myclass">
                 <div id="order">
-                    <label>Order id: ${order.id}</label><br/>
-                    <label>Order date: ${order.startDate}</label><br/>
-                    <label>Order cost: ${order.sum}</label><br/>
-                    <label>Ordered by: ${order.manager.surname} ${order.manager.name}</label><br/>
-                    <label>Date of receipt: ${order.ready}</label><br/>
-                    <label>Date of sending: ${order.customer.send}</label><br/>
+                    <label>ID: ${order.id}</label><br/>
+                    <label>Дата получения заказа: ${order.startDate}</label><br/>
+                    <label>Стоимость: ${order.sum}</label><br/>
+                    <label>Оформлено: ${order.manager.surname} ${order.manager.name}</label><br/>
+                    <label>Дата готовности: ${order.GetReady()}</label><br/>
+                    <label>Date of sending: ${order.GetSend()}</label><br/>
                     <label>Status: ${order.getStatusText()}</label><br/>
+                    <br/><br/>
+                    Покупатель:
+                    <label>Имя: ${order.customer.name}</label><br/>
+                    <label>Адрес: ${order.customer.address}</label><br/>
+                    <label>Тип оплаты: ${order.customer.GetPayment()}</label><br/>
                 </div>
                 <br/><br/>
                 <div id="products">

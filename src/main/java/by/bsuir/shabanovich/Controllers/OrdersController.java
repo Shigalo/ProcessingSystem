@@ -1,9 +1,10 @@
 package by.bsuir.shabanovich.Controllers;
 
 import by.bsuir.shabanovich.Entities.Order;
-import by.bsuir.shabanovich.Services.OrderService;
-import by.bsuir.shabanovich.Services.NomenclatureService;
-import by.bsuir.shabanovich.Services.WorkerService;
+import by.bsuir.shabanovich.Entities.Product;
+import by.bsuir.shabanovich.Entities.Route;
+import by.bsuir.shabanovich.Entities.RouteData;
+import by.bsuir.shabanovich.Services.*;
 import by.bsuir.shabanovich.Supporting.WordReportCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -34,6 +35,12 @@ public class OrdersController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    RouteService routeService;
+
+    @Autowired
+    ProductService productService;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -66,12 +73,13 @@ public class OrdersController {
     @PostMapping("/add")
     public String addNomenclature(@RequestParam String name,
                                   @RequestParam String address,
+                                  @RequestParam String payment,
                                   @RequestParam Integer[] nomenclature,
                                   @RequestParam Integer[] count,
                                   Model model) {
         model.addAttribute("isAdmin", userService.isAdmin());
         model.addAttribute("isLogin", userService.isLogin());
-        orderService.addOrder(nomenclature, count, name, address);
+        orderService.addOrder(nomenclature, count, name, address, payment);
 
         return "redirect:/orders/list";
     }
@@ -102,8 +110,6 @@ public class OrdersController {
         return "/orders/route";
     }
 
-    private String path;
-
     @PostMapping("/route")
     public String print(Model model,
                         @RequestParam String date,
@@ -111,31 +117,49 @@ public class OrdersController {
         model.addAttribute("isLogin", userService.isLogin());
         model.addAttribute("isAdmin", userService.isAdmin());
 
-        System.out.println(date);
-        for(int i : pos){
-            System.out.println(i);
-        }
-        path = "D:\\" + date + " route.docx";
+        Route route = routeService.create(date);
+        routeService.addToRoute(route, pos);
 
-        WordReportCreator creator = new WordReportCreator(path);
+        return "redirect:/orders/download";
+    }
 
-        for(int i = 1; i < 11; i++)
-            creator.PushData(String.valueOf(i), String.valueOf(i * 10 + 5));
-        creator.Create();
+    @GetMapping("/download")
+    public String downloadPage(Model model) {
+        model.addAttribute("isLogin", userService.isLogin());
+        model.addAttribute("isAdmin", userService.isAdmin());
 
+        model.addAttribute("files", routeService.findAll());
         return "/orders/download";
     }
 
-    @RequestMapping(value = "/file", method = RequestMethod.GET)
-    public void getSteamingFile1(HttpServletResponse response) throws IOException {
-        response.setContentType("application/docx");
+    @RequestMapping(value = "/file/{routeId}", method = RequestMethod.GET)
+    @ResponseBody
+    public void getSteamingFile1(HttpServletResponse response, @PathVariable("routeId") String routeId) throws IOException {
+        String name = "route.docx";
+        String path = ".\\" + name;
 
-        response.setHeader("Content-Disposition", "attachment; filename=\"route.docx\"");
+        Route route = routeService.findById(routeId);
+        List<RouteData> routeData = routeService.getData(route);
+
+        WordReportCreator creator = new WordReportCreator(path, route.getSendDate().toString());
+
+        for(RouteData data : routeData) {
+            Order order = data.getOrder();
+            List<Product> products = productService.getProductsByOrder(order);
+            creator.pushData(order, products);
+        }
+
+        creator.Create();
+
+        response.setContentType("application/docx");
+        response.setHeader("Content-Disposition", "attachment; filename=\""+name+"\"");
         InputStream inputStream = new FileInputStream(new File(path));
         int nRead;
         while ((nRead = inputStream.read()) != -1) {
             response.getWriter().write(nRead);
         }
+//        file.delete();
+
     }
 
     @GetMapping("/remove/{id}")

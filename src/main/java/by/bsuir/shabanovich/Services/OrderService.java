@@ -39,8 +39,8 @@ public class OrderService {
 
     public Order findById(Integer id) { return orderRepository.findById(id); }
 
-    public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount, String name, String address) {
-        Customer customer = customerService.add(name, address);
+    public void addOrder(Integer[] nomenclatureId, Integer[] nomenclatureCount, String name, String address, String payment) {
+        Customer customer = customerService.add(name, address, payment);
 
         Worker manager = workerService.getCurrentUser();
         LocalDate date = LocalDate.now();
@@ -87,5 +87,7 @@ public class OrderService {
     public void remove(int id) {
         orderRepository.deleteById(id);
     }
+
+    public void update(Order order) { orderRepository.save(order); }
 
 }

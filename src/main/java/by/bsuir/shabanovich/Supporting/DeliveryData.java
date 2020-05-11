@@ -1,41 +1,43 @@
 package by.bsuir.shabanovich.Supporting;
 
-import java.util.ArrayList;
+import by.bsuir.shabanovich.Entities.Order;
+import by.bsuir.shabanovich.Entities.Product;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 public class DeliveryData {
 
-    private int precedence;
-    private String address;
-    private String customer;
+    private Order order;
+    private List<Product> products;
 
-    DeliveryData(String address, String customer) {
-        this.address = address;
-        this.customer = customer;
+    public DeliveryData(Order order, List<Product> products) {
+        this.order = order;
+        this.products = products;
     }
 
-    public DeliveryData(int precedence, String address, String customer) {
-        this.precedence = precedence;
-        this.address = address;
-        this.customer = customer;
-    }
-
-    void setPrecedence(int precedence) {
-        this.precedence = precedence;
-    }
-
-    ArrayList<String> GetData() {
-        ArrayList<String> result = new ArrayList<>();
-        result.add(String.valueOf(precedence));
-        result.add(address);
-        result.add(customer);
+    static List<String> GetLabels() {
+        List<String> result = new ArrayList<>();
+        result.add("Наименование");
+        result.add("Артикул");
+        result.add("Количество");
         return result;
     }
 
-    static ArrayList<String> GetLabels() {
-        ArrayList<String> result = new ArrayList<>();
-        result.add("#");
-        result.add("Адрес");
-        result.add("Покупатель");
+    String getCustomer() {
+        return "ФИО: " + order.getCustomer().getName() +
+                "\nАдрес: " + order.getCustomer().getAddress() +
+                "\nТип оплаты: " + order.getCustomer().GetPayment() + "\n\n";
+    }
+
+    List<String> GetData(int i) {
+        List<String> result = new ArrayList<>();
+        Product product = products.get(i);
+        result.add(product.getNomenclature().getName());
+        result.add(product.getNomenclature().getArticle());
+        result.add(String.valueOf(product.getOrdered()));
         return result;
     }
 }
