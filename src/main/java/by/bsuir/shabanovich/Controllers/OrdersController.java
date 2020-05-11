@@ -150,6 +150,7 @@ public class OrdersController {
         }
 
         creator.Create();
+        File file = new File(path);
 
         response.setContentType("application/docx");
         response.setHeader("Content-Disposition", "attachment; filename=\""+name+"\"");
@@ -158,7 +159,8 @@ public class OrdersController {
         while ((nRead = inputStream.read()) != -1) {
             response.getWriter().write(nRead);
         }
-//        file.delete();
+        inputStream.close();
+        System.out.println(file.delete());
 
     }
 
